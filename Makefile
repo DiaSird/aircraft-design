@@ -1,19 +1,14 @@
 
 default: start
 
-img-build:
-				docker build --pull --rm -f ".devcontainer/Dockerfile" -t aircraft-design:latest "."
-
-build:
-				powershell -noprofile -File 'scripts/img-build.ps1'
-
-rebuild:
-				docker rm aircraft-design
-				make build
-
-compose:
+rewrite-display:
 				powershell -noprofile -File 'scripts/rewrite-display.ps1'
+
+compose: rewrite-
 				docker-compose up -d --build
+
+run:
+				poetry run python src/1st-sizing/sizeplt-gui.py
 
 start:
 				poetry run python src/main.py

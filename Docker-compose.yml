@@ -1,0 +1,11 @@
+version: "3.2"
+services:
+  python-gui:
+    build:
+      dockerfile: ./development_machine/Dockerfile
+    restart: always
+    tty: true
+    volumes:
+      - ./:/home/user/code
+    environment:
+      - DISPLAY=${IPADDRESS}

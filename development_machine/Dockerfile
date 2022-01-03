@@ -1,12 +1,8 @@
-FROM python:3.8.9-slim-buster
+FROM python:3.8.9
 
 # hadolint ignore=DL3008,DL3059,DL3015
 RUN apt-get update \
-  && apt-get install -y curl \
-  git \
-  make \
-  sudo \
-  vim \
+  && apt-get install -y curl git make sudo vim tk-dev \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
 

@@ -1,18 +1,10 @@
 $obj = Get-NetIPConfiguration -InterfaceAlias "vEthernet (WSL)" | ForEach-Object { $_.IPv4Address }
 $WSLIPAddress = $obj[0].ToString()
+New-Item .env -Force
 
-$composeText = @"
-version: "3.2"
-services:
-  python-gui:
-    image: ./Dockerfile
-    build: .
-    restart: always
-    tty: true
-    volumes:
-      - $(Get-Location):/home/user/code
-    environment:
-      - DISPLAY=$WSLIPAddress
-"@
+$UTF8NoBomEnc = New-Object System.Text.UTF8Encoding $False
+[System.IO.File]::WriteAllLines(".env","IPADDRESS=$($WSLIPAddress):0.0", $UTF8NoBomEnc)
 
-$composeText > .\.devcontainer\docker-compose.yml
+Write-Host ""
+
+docker-compose config

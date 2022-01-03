@@ -1,18 +1,12 @@
 // For format details, see https://aka.ms/devcontainer.json. For config options, see the README at:
-// https://github.com/microsoft/vscode-dev-containers/tree/v0.209.6/containers/python-3
+// https://github.com/microsoft/vscode-dev-containers/tree/v0.158.0/containers/docker-existing-docker-compose
+// If you want to run as a non-root user in the container, see .devcontainer/docker-compose.yml.
 {
-  "build": {
-    "args": {
-      // Update 'VARIANT' to pick a Python version: 3, 3.10, 3.9, 3.8, 3.7, 3.6
-      // Append -bullseye or -buster to pin to an OS version.
-      // Use -bullseye variants on local on arm64/Apple Silicon.
-      "VARIANT": "3.8"
-    },
-    // "context": "..",
-    "dockerfile": "./Dockerfile"
-  },
+  "service": "python-gui", // Docker Composeの接続サービス名,
+  "dockerComposeFile": [
+    "../docker-compose.yml" // Docker Composeのファイルパス
+  ],
   "extensions": [
-    // コンテナ内でインストールするVS Codeの拡張機能ID
     "almenon.arepl",
     "bungcip.better-toml",
     "dongli.python-preview",
@@ -30,15 +24,15 @@
     "njpwerner.autodocstring",
     "njqdev.vscode-python-typehint",
     "oderwat.indent-rainbow",
+    "spmeesseman.vscode-taskexplorer",
     "tamasfe.even-better-toml",
     "visualstudioexptteam.vscodeintellicode"
   ],
-  "mounts": ["source=${localWorkspaceFolder},target=/home/user/code,type=bind"],
   "name": "aircraft-design", // コンテナ表示名
   "remoteEnv": {
     "LOCAL_WORKSPACE_FOLDER": "${localWorkspaceFolder}"
   },
-  "remoteUser": "root", // デフォルトユーザをrootから切り替える
+  "remoteUser": "user", // デフォルトユーザをrootから切り替える
   "settings": {
     // ---------------------------------------------------------------------------------------------------------------------------
     // Language Settings
