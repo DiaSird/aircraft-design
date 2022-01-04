@@ -4,6 +4,8 @@ English | [日本語](./docs/i18n/jp/readme.md)
 
 Conceptual aircraft design
 
+![wlsg](docs/images/wslg.png)
+
 - [aircraft-design](#aircraft-design)
   - [Requirements](#requirements)
     - [local PC](#local-pc)
