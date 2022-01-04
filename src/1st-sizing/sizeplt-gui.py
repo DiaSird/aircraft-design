@@ -48,21 +48,23 @@ class SizingPlot():
             self.x_cr.append(j)
 
         # # -- Design Requirements --
+        # Initialize
         self.s_tofl = 0.0  # [ft]
         self.s_fl = 0.0   # [ft]
-        self.m_cruise = 0.0
-        # GUI
-        self.gui(self)
+        self.m_cruise = 0.80
+
+        # Default
+        # # m_cruise: Mach number on cruise
+        # #           definition  M := V/a
+        # self.m_cruise = 0.80
+
         # # s_tofl: take-off fielift_drag length
         # self.s_tofl = 6000.0  # [ft]
 
         # # s_fl: Far landing fielift_drag length
         # self.s_fl = 5000.0   # [ft]
 
-        # # m_cruise: Mach number on cruise
-        # #           definition  M := V/a
-        # self.m_cruise = 0.80
-
+    def set_param(self):
         # a_ratio: sound speed ratio between the height and sea level
         #          Height 35000 [ft],; approximately a_ratio = 0.87
         self.a_ratio = 0.87
@@ -293,23 +295,25 @@ class SizingPlot():
 
         plt.legend(loc="upper left",
                    bbox_to_anchor=(0, 1.0), frameon=True)
-        # plt.show()
+        plt.show()
 
     # GUI Design:
 
-    def gui(self, m_cruise):
-        # -- Design Requirements --
-        # s_tofl: take-off fielift_drag length
-        # self.s_tofl = 6000.0  # [ft]
+    def gui(self, m_cruise, s_tofl, s_fl):
+        """
+        -- Design Requirements --
+        *Default
 
-        # s_fl: Far landing fielift_drag length
-        # self.s_fl = 5000.0   # [ft]
+        m_cruise: Mach number on cruise
+                  definition  M := V/a
+        self.m_cruise = 0.80
 
-        # m_cruise: Mach number on cruise
-        #           definition  M := V/a
-        # self.m_cruise = 0.80
+        s_tofl: take-off fielift_drag length
+        self.s_tofl = 6000.0  # [ft]
 
-        # dictionary
+        s_fl: Far landing fielift_drag length
+        self.s_fl = 5000.0   # [ft]
+        """
         sg.theme("BlueMono")
         OK = 'ok'
         layout = [[sg.Text("1st Sizing - Design Requirement -")],
@@ -326,29 +330,36 @@ class SizingPlot():
                   [sg.Text("FAR field length[ft]", size=(15, 1)),
                    sg.Combo(("6000", "6500"), size=(10, 1), key="fl",
                             text_color=None, default_value="6000")],
-                  # Button
-                  [sg.Button("OK", key=OK), sg.Cancel()]]
+                  # OK or cancel
+                  [sg.Button("OK", key=OK), sg.Cancel()]
+                  ]
 
         window = sg.Window("Sizing plot", layout=layout)
 
-        event_handler = {
-            OK: lambda v:
-                sg.popup(f"mach: {v[mach]}\n tofl: {v[tofl]}\n fl: {v[fl]}"),
-        }
+        event, values = window.read()
 
-        while True:                       # Event loop
-            event, value = window.read()
+        if event == OK:
+            # cruise
+            if values["mach"] == "0.7":
+                self.m_cruise = 0.70
+            elif values["mach"] == "0.75":
+                self.m_cruise = 0.75
+            else:
+                self.m_cruise = 0.80
 
-            if event == "OK":
-                self.m_cruise = value[mach]
-                self.s_tofl = value[tofl]
-                self.s_fl = value[fl]
+            # take-off
+            if values["tofl"] == "5000":
+                self.s_tofl = 5000.0
+            elif values["tofl"] == "6000":
+                self.s_tofl = 6000.0
 
-            elif event == sg.WIN_CLOSED:
-                break
+            # land
+            if values["fl"] == "6000":
+                self.s_fl = 6000.0
+            elif values["fl"] == "6500":
+                self.s_fl = 6500.0
 
-            func = event_handler[event]
-            func(value)
+        window.close()
 
         # End of GUI Design
 
@@ -359,6 +370,14 @@ if __name__ == "__main__":
 
     # class
     sp = SizingPlot()
+
+    # GUI
+    sp.gui(sp.m_cruise, sp.s_tofl, sp.s_fl)
+    print("m_cruise = ", sp.m_cruise)
+    print(sp.s_tofl, sp.s_fl)
+
+    # set parameters
+    sp.set_param()
 
     # 1. Take-off
     sp.take_off(sp.x, sp.y1, sp.y2, sp.y3, sp.m,
