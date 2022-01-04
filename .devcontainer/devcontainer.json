@@ -78,6 +78,7 @@
       "**/.git/objects/**": true,
       "**/.idea": true
     },
+    "terminal.integrated.defaultProfile.linux": "bash",
     "python.defaultInterpreterPath": "/usr/local/bin/python",
     "python.envFile": "${workspaceFolder}/.env",
     // ---------------------------------------------------------------------------------------------------------------------------
@@ -96,5 +97,5 @@
     "python.linting.pycodestyleEnabled": true,
     "python.pythonPath": "${workspaceRoot}/.venv/Script/python"
   },
-  "workspaceFolder": "/home/user/code",
+  "workspaceFolder": "/home/user/code"
 }
