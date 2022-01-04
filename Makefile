@@ -11,6 +11,9 @@ compose-wsl:
 compose-x:
 				powershell -noprofile -File 'scripts/set-xserver.ps1'
 
+compose: compose-wsl
+				bash docker-compose -f docker-compose.yml up -d
+
 # --------------------------------------------------------------------------------------------------
 # In container command
 # --------------------------------------------------------------------------------------------------
