@@ -11,9 +11,13 @@
     "dongli.python-preview",
     "donjayamanne.python-environment-manager",
     "donjayamanne.python-extension-pack",
+    "eamodio.gitlens",
     "esbenp.prettier-vscode",
+    "henriiik.docker-linter",
     "kevinrose.vsc-python-indent",
     "mgesbert.python-path",
+    "mhutchie.git-graph",
+    "ms-azuretools.vscode-docker",
     "ms-ceintl.vscode-language-pack-ja",
     "ms-python.python",
     "ms-python.vscode-pylance",
@@ -23,6 +27,7 @@
     "oderwat.indent-rainbow",
     "spmeesseman.vscode-taskexplorer",
     "tamasfe.even-better-toml",
+    "tyriar.sort-lines",
     "visualstudioexptteam.vscodeintellicode"
   ],
   "name": "aircraft-design", // コンテナ表示名

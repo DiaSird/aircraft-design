@@ -5,10 +5,12 @@
     "dongli.python-preview",
     "donjayamanne.python-environment-manager",
     "donjayamanne.python-extension-pack",
+    "eamodio.gitlens",
     "esbenp.prettier-vscode",
     "henriiik.docker-linter",
     "kevinrose.vsc-python-indent",
     "mgesbert.python-path",
+    "mhutchie.git-graph",
     "ms-azuretools.vscode-docker",
     "ms-ceintl.vscode-language-pack-ja",
     "ms-python.python",
@@ -19,6 +21,7 @@
     "oderwat.indent-rainbow",
     "spmeesseman.vscode-taskexplorer",
     "tamasfe.even-better-toml",
-    "visualstudioexptteam.vscodeintellicode",
+    "tyriar.sort-lines",
+    "visualstudioexptteam.vscodeintellicode"
   ]
 }
