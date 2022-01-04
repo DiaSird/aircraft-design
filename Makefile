@@ -1,11 +1,19 @@
-
 default: start
 
-rewrite-display:
-				powershell -noprofile -File 'scripts/rewrite-display.ps1'
+# --------------------------------------------------------------------------------------------------
+# Docker compose settings
+# --------------------------------------------------------------------------------------------------
+# For Windows11 + WSL + WSLg(https://github.com/microsoft/wslg)
+compose-wsl:
+				bash './scripts/set-wslg.sh'
 
-compose: rewrite
-				docker-compose up -d --build
+# For Windows10(11) + X server(https://sourceforge.net/projects/vcxsrv/files/)
+compose-x:
+				powershell -noprofile -File 'scripts/set-xserver.ps1'
+
+# --------------------------------------------------------------------------------------------------
+# In container command
+# --------------------------------------------------------------------------------------------------
 
 start:
 				poetry run python src/1st-sizing/sizeplt-gui.py

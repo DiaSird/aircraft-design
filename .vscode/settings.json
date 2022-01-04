@@ -15,8 +15,11 @@
   // ---------------------------------------------------------------------------------------------------------------------------
   // Configures glob patterns for excluding files and folders.
   "files.exclude": {
+    "**/*.mod": true,
+    "**/.idea": true,
     "**/__pycache__": true,
-    "**/.idea": true
+    ".mypy_cache": true,
+    ".venv": true
   },
 
   // Configures glob patterns of file paths to exclude from file watching.
@@ -67,12 +70,15 @@
   "python.linting.enabled": true,
   "cSpell.words": [
     "autopep",
+    "devcontainer",
     "mypy",
+    "noprofile",
     "pycache",
     "pycodestyle",
     "pydocstyle",
     "pylint",
     "pysen",
+    "wslg",
     "yapf"
   ]
 }

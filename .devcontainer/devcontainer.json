@@ -13,10 +13,8 @@
     "donjayamanne.python-environment-manager",
     "donjayamanne.python-extension-pack",
     "esbenp.prettier-vscode",
-    "henriiik.docker-linter",
     "kevinrose.vsc-python-indent",
     "mgesbert.python-path",
-    "ms-azuretools.vscode-docker",
     "ms-ceintl.vscode-language-pack-ja",
     "ms-python.python",
     "ms-python.vscode-pylance",
@@ -30,7 +28,11 @@
   ],
   "name": "aircraft-design", // コンテナ表示名
   "remoteEnv": {
+    // "DISPLAY": ":0",
     "LOCAL_WORKSPACE_FOLDER": "${localWorkspaceFolder}"
+    // "PULSE_SERVER": "/mnt/wslg/PulseServer",
+    // "WAYLAND_DISPLAY": "wayland-0",
+    // "XDG_RUNTIME_DIR": "/mnt/wslg/runtime-dir"
   },
   "remoteUser": "user", // デフォルトユーザをrootから切り替える
   "settings": {
@@ -65,8 +67,11 @@
     // ---------------------------------------------------------------------------------------------------------------------------
     // Configures glob patterns for excluding files and folders.
     "files.exclude": {
+      "**/*.mod": true,
+      "**/.idea": true,
       "**/__pycache__": true,
-      "**/.idea": true
+      ".mypy_cache": true,
+      ".venv": true
     },
     // Configures glob patterns of file paths to exclude from file watching.
     // Changing this setting requires a restart. When you experience Code consuming
@@ -94,5 +99,6 @@
     "python.linting.pycodestyleEnabled": true,
     "python.pythonPath": "${workspaceRoot}/.venv/Script/python"
   },
-  "workspaceFolder": "/home/user/code" // Workspaceのフォルダを指定
+  "onCreateCommand": "make install-dev",
+  "workspaceFolder": "/home/user/code" // Workspaceのフォルダを指定,
 }
