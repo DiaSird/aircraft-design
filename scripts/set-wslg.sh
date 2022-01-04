@@ -8,7 +8,8 @@ See more at: https://github.com/microsoft/wslg"
   exit 1
 fi
 
-envPath="./docker/docker-env/.env.wsl"
+wslgDir="./docker/wslg"
+envPath="$wslgDir/.env.wslg"
 
 {
   echo "DISPLAY=$DISPLAY
@@ -24,7 +25,7 @@ echo "----------------------------------------------------------------"
 
 echo ""
 
-cat ./docker/Docker-compose-wsl.yml >docker-compose.yml
+cat "$wslgDir"/Docker-compose-wslg.yml >docker-compose.yml
 echo "$(tput setaf 2)"For WSLg: Docker-compose.yml generated."$(tput sgr0)"
 
 echo "------------------docker-compose.yml settings-------------------"

@@ -13,5 +13,4 @@ services:
       - /mnt/wslg:/mnt/wslg
       - /tmp/.X11-unix:/tmp/.X11-unix
     env_file:
-      - ./docker/docker-env/.env.wsl
-
+      - ./docker/wslg/.env.wslg

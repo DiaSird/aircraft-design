@@ -1,4 +1,5 @@
-$envPath= ".\docker\docker-env\.env.xserver"
+$xDir = ".\docker\xserver"
+$envPath= "$xDir\.env.xserver"
 
 $obj = Get-NetIPConfiguration -InterfaceAlias "vEthernet (WSL)" | ForEach-Object { $_.IPv4Address }
 $WSLIPAddress = $obj[0].ToString()
@@ -11,7 +12,7 @@ Write-Output "------------------------------------------------------------------
 
 Write-Host ""
 
-Get-Content ./docker/Docker-compose-xserver.yml > docker-compose.yml
+Get-Content $xDir/Docker-compose-xserver.yml > docker-compose.yml
 Write-Host "For X-server: Docker-compose.yml is generated." -ForegroundColor Green
 Write-Output "------------------docker-compose.yml settings-------------------"
 docker-compose config

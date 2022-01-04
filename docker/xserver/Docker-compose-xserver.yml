@@ -8,5 +8,4 @@ services:
     volumes:
       - ./:/home/user/code
     env_file:
-      - ./docker/docker-env/.env.xserver
-
+      - ./docker/xserver/.env.xserver
