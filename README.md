@@ -1,5 +1,7 @@
 # aircraft-design
 
+English | [日本語](./docs/i18n/jp/readme.md)
+
 Conceptual aircraft design
 
 - [aircraft-design](#aircraft-design)
@@ -57,6 +59,8 @@ code .
 
 2.press F1, select `Reopen in Container...`.
 Please wait a moment.This is going to take some time.
+
+3.Start the X server.
 
 ## Make usage
 
