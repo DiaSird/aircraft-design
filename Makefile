@@ -4,14 +4,11 @@ default: start
 rewrite-display:
 				powershell -noprofile -File 'scripts/rewrite-display.ps1'
 
-compose: rewrite-
+compose: rewrite
 				docker-compose up -d --build
 
-run:
-				poetry run python src/1st-sizing/sizeplt-gui.py
-
 start:
-				poetry run python src/main.py
+				poetry run python src/1st-sizing/sizeplt-gui.py
 
 lint:
 				poetry run pysen run lint

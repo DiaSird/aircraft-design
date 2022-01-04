@@ -1,0 +1,24 @@
+{
+  "recommendations": [
+    "almenon.arepl",
+    "bungcip.better-toml",
+    "dongli.python-preview",
+    "donjayamanne.python-environment-manager",
+    "donjayamanne.python-extension-pack",
+    "esbenp.prettier-vscode",
+    "henriiik.docker-linter",
+    "kevinrose.vsc-python-indent",
+    "mgesbert.python-path",
+    "ms-azuretools.vscode-docker",
+    "ms-ceintl.vscode-language-pack-ja",
+    "ms-python.python",
+    "ms-python.vscode-pylance",
+    "mutantdino.resourcemonitor",
+    "njpwerner.autodocstring",
+    "njqdev.vscode-python-typehint",
+    "oderwat.indent-rainbow",
+    "spmeesseman.vscode-taskexplorer",
+    "tamasfe.even-better-toml",
+    "visualstudioexptteam.vscodeintellicode",
+  ]
+}
