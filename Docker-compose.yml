@@ -12,8 +12,6 @@ services:
       - ./:/home/user/code
       - /mnt/wslg:/mnt/wslg
       - /tmp/.X11-unix:/tmp/.X11-unix
-    environment:
-      - DISPLAY
-      - PULSE_SERVER
-      - WAYLAND_DISPLAY
-      - XDG_RUNTIME_DIR
+    env_file:
+      - ./docker/docker-env/.env.wsl
+

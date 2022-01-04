@@ -8,16 +8,18 @@ See more at: https://github.com/microsoft/wslg"
   exit 1
 fi
 
+envPath="./docker/docker-env/.env.wsl"
+
 {
   echo "DISPLAY=$DISPLAY
 PULSE_SERVER=$PULSE_SERVER
 WAYLAND_DISPLAY=$WAYLAND_DISPLAY
 XDG_RUNTIME_DIR=$XDG_RUNTIME_DIR"
-} >.env
+} >$envPath
 echo "$(tput setaf 2)"For WSLg: .env generated."$(tput sgr0)"
 
-echo "------------------------ .env ----------------------------------"
-cat .env
+echo "------------------------ $envPath -------------------------"
+cat $envPath
 echo "----------------------------------------------------------------"
 
 echo ""

@@ -37,7 +37,7 @@ install:
 				poetry install --no-dev
 
 clean:
-				rm -rf  **/__pycache__ **/**/__pycache__ .venv
+				rm -rf  **/__pycache__ **/**/__pycache__ .venv ./docker/.env
 
 
 .PHONY: clean test
