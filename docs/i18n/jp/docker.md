@@ -2,9 +2,14 @@
 
 [English](../en/docker.md) | 日本語
 
-![wlsg](../../images/wslg.png)
+![WSLg](../../images/wslg.png)
 
-- [Docker](#Docker)
+- [Docker](#docker)
+  - [必要なもの](#必要なもの)
+  - [開発](#開発)
+    - [Docker(WSLg)を使用する場合](#dockerwslgを使用する場合)
+    - [Docker(X サーバー)を使用する場合](#dockerx-サーバーを使用する場合)
+  - [Make の使い方](#make-の使い方)
 
 ## 必要なもの
 
