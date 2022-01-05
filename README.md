@@ -2,9 +2,6 @@
 title: Conceptual aircraft design
 author: DiaSird
 fontsize: 11pt
-header-includes:
-  - \lstset{numbers=left, frame=trlb, frameround=tttt, breaklines=true}
-  - \renewcommand{\lstlistingname}{Source Code}
 ---
 
 Initial version: 2022/01/05
@@ -31,7 +28,6 @@ Revised: 2021/
 ---
 
 - 1st sizing
-  This code shows the sizing plot graph. The sizing plot can be estimated aircraft parameters such that Thrust-Weight ratio, Weight-Wing area ratio on taking off.
 
 [](p=paragraph)
 <p align="center">
@@ -41,7 +37,7 @@ Revised: 2021/
 
 <div style="text-align: center;">
 
-Fig.1 Sizing-Plot graph for regional jet^[1]
+  This code shows the sizing plot graph. The sizing plot can be estimated aircraft parameters such that Thrust-Weight ratio, Weight-Wing area ratio on taking off.
 
 ## 2. Directory Structure
 
