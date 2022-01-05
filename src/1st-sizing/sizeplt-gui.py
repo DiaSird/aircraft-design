@@ -305,7 +305,7 @@ class SizingPlot():
               >= 0.024
         '''
         count = 0
-        while count >= self.m:
+        while count < self.m:
             count += 1
 
             k = (2 * self.lp *
