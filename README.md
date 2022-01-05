@@ -22,6 +22,7 @@ Revised: 2021/
   - [3. Requirements](#3-requirements)
   - [4. Make usage](#4-make-usage)
   - [Reference](#reference)
+  - [License](#license)
 
 ## 1. Abstract
 
@@ -43,11 +44,39 @@ Revised: 2021/
 ---
 
 ```Shell
-.
-├──── Makefile                    # make ref. chapter 4 (Make Usage)
-└──── src                         # source code
-    ├──── sizeplt-gui.py          # sizing plot with the GUI module PySimpleGUI
-    └──── W-takeoff.f90           # initial sizing for maximum take-off weight
+aircraft-design
+├── LICENSE
+├── Makefile                      # make ref. chapter 4 (Make Usage)
+├── README.md
+├── docker/
+|  ├── Dockerfile
+|  ├── wslg/
+|  |  └── Docker-compose-wslg.yml
+|  └── xserver/
+|     └── Docker-compose-xserver.yml
+├── docker-compose.yml
+├── docs/
+|  ├── i18n/
+|  |  ├── en/
+|  |  |  └── docker.md
+|  |  └── jp/
+|  |     └── docker.md
+|  └── images/
+|     └── wslg.png
+├── img/
+|  └── Fig1.png
+├── out.txt
+├── poetry.lock
+├── pyproject.toml
+├── scripts/
+|  ├── set-wslg.sh
+|  └── set-xserver.ps1
+└── src/                         # source code
+   └── 1st-sizing/
+      ├── W-takeoff.f90          # initial sizing for maximum take-off weight
+      └── sizeplt-gui.py         # sizing plot with the GUI module PySimpleGUI
+
+directory: 12 file: 18
 ```
 
 ## 3. Requirements
