@@ -27,16 +27,13 @@ Revised: 2021/
 
 ---
 
-- 1st sizing
-
 [](p=paragraph)
 <p align="center">
-<img src="img/Fig1.png" width="100%">
+<img src="img/Fig1.png" width="80%">
 
 </p>
 
-<div style="text-align: center;">
-
+- 1st sizing
   This code shows the sizing plot graph. The sizing plot can be estimated aircraft parameters such that Thrust-Weight ratio, Weight-Wing area ratio on taking off.
 
 ## 2. Directory Structure
