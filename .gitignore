@@ -154,5 +154,6 @@ cython_debug/
 [Ll]ocal
 pyvenv.cfg
 pip-selfcheck.json
+tree.txt
 
 # End of https://www.toptal.com/develop

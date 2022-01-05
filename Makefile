@@ -43,4 +43,7 @@ clean:
 				rm -rf  **/__pycache__ **/**/__pycache__ .venv ./docker/.env
 
 
+tree:
+				powershell -noprofile -File 'scripts/tree.ps1'
+
 .PHONY: clean test

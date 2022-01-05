@@ -83,7 +83,7 @@ directory: 12 file: 18
 
 ---
 
-- python 3.8 &lt; 3.10
+- python 3.7.x or 3.8.x
 - poetry(package maneger):
 
 If you do not have `poetry` installed, you can install it with the following command.
