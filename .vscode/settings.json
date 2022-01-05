@@ -8,7 +8,7 @@
   // Works best when 'quickSuggestions' aren't enabled.
   "editor.tabCompletion": "on",
   // Columns at which to show vertical rulers.
-  "editor.rulers": [100],
+  "editor.rulers": [80],
 
   // ---------------------------------------------------------------------------------------------------------------------------
   // Files

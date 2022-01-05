@@ -22,14 +22,14 @@ build-backend = "poetry.core.masonry.api"
 [tool.pysen]
 version = "0.10.1"
 
-# refference: https://dev.classmethod.jp/articles/shuntaka-python-tools/
+# refference: https://github.com/pfnet/pysen#quickstart-set-up-linters-using-pysen
 [tool.pysen.lint]
 enable_black = true
 enable_flake8 = true
 enable_isort = true
 enable_mypy = true
 mypy_preset = "strict"
-line_length = 100
+line_length = 80
 py_version = "py37"
 [[tool.pysen.lint.mypy_targets]]
 paths = ["."]
