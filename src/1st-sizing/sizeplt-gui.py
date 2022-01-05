@@ -323,9 +323,10 @@ class SizingPlot():
                v_cruise, c_d0,
                w_r, ar):
         '''
-        y = f(x):
+        function  y = f(x):
              y = 1/lp_cr *
-                 (W_cr/W_TO) * (T/W)_cruise
+                 (W_cr/W_TO) *
+                 (T/W)_cruise
             (T/W)_cruise = (C_D0 + ΔC_D0) *
                            q / (W_cr/W_TO) +
                            (W_cr/W_TO) *
@@ -502,7 +503,6 @@ if __name__ == "__main__":
     # 3. Climb
     sp.climb(sp.y4, sp.m, sp.lp,
              sp.lift_drag)
-
     # 4. Cruise
     sp.cruise(sp.x_cr, sp.y5, sp.m,
               sp.lp_cr, sp.e_clean,
