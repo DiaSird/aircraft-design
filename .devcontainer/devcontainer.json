@@ -1,0 +1,106 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the README at:
+// https://github.com/microsoft/vscode-dev-containers/tree/v0.158.0/containers/docker-existing-docker-compose
+// If you want to run as a non-root user in the container, see .devcontainer/docker-compose.yml.
+{
+  "dockerComposeFile": [
+    "../docker-compose.yml" // Docker Composeのファイルパス
+  ],
+  "extensions": [
+    "almenon.arepl",
+    "bungcip.better-toml",
+    "dongli.python-preview",
+    "donjayamanne.python-environment-manager",
+    "donjayamanne.python-extension-pack",
+    "eamodio.gitlens",
+    "esbenp.prettier-vscode",
+    "henriiik.docker-linter",
+    "kevinrose.vsc-python-indent",
+    "mgesbert.python-path",
+    "mhutchie.git-graph",
+    "ms-azuretools.vscode-docker",
+    "ms-ceintl.vscode-language-pack-ja",
+    "ms-python.python",
+    "ms-python.vscode-pylance",
+    "mutantdino.resourcemonitor",
+    "njpwerner.autodocstring",
+    "njqdev.vscode-python-typehint",
+    "oderwat.indent-rainbow",
+    "spmeesseman.vscode-taskexplorer",
+    "tamasfe.even-better-toml",
+    "tyriar.sort-lines",
+    "visualstudioexptteam.vscodeintellicode"
+  ],
+  "name": "aircraft-design", // コンテナ表示名
+  "onCreateCommand": "make install-dev",
+  "remoteEnv": {
+    "LOCAL_WORKSPACE_FOLDER": "${localWorkspaceFolder}"
+  },
+  "remoteUser": "user", // デフォルトユーザをrootから切り替える
+  "service": "python-gui", // Docker Composeの接続サービス名,
+  "settings": {
+    // ---------------------------------------------------------------------------------------------------------------------------
+    // Language Settings
+    // ---------------------------------------------------------------------------------------------------------------------------
+    "[python]": {
+      "editor.defaultFormatter": "ms-python.python",
+      "editor.formatOnType": false,
+      "editor.tabSize": 4
+    },
+    "cSpell.words": ["pycache", "pysen"],
+    // Columns at which to show vertical rulers.
+    "editor.rulers": [80],
+    // ---------------------------------------------------------------------------------------------------------------------------
+    // Editor
+    // ---------------------------------------------------------------------------------------------------------------------------
+    // Inserts snippets when their prefix matches.
+    // Works best when 'quickSuggestions' aren't enabled.
+    "editor.tabCompletion": "on",
+    "files.associations": {
+      ".env": "dotenv",
+      ".gitignore": "ignore",
+      "*.html": "html",
+      "*.json": "jsonc",
+      "*.md": "markdown",
+      "*.spec": "python",
+      "*.txt": "txt"
+    },
+    // ---------------------------------------------------------------------------------------------------------------------------
+    // Files
+    // ---------------------------------------------------------------------------------------------------------------------------
+    // Configures glob patterns for excluding files and folders.
+    "files.exclude": {
+      ".mypy_cache": true,
+      ".venv": true,
+      "**/__pycache__": true,
+      "**/.idea": true,
+      "**/*.mod": true
+    },
+    // Configures glob patterns of file paths to exclude from file watching.
+    // Changing this setting requires a restart. When you experience Code consuming
+    // lots of cpu time on startup, you can exclude large folders to reduce the initial load.
+    "files.watcherExclude": {
+      "**/__pycache__": true,
+      "**/.git/objects/**": true,
+      "**/.idea": true
+    },
+    "terminal.integrated.defaultProfile.linux": "bash",
+    "python.defaultInterpreterPath": "/usr/local/bin/python",
+    "python.envFile": "${workspaceFolder}/.env",
+    // ---------------------------------------------------------------------------------------------------------------------------
+    // Lint, Format Settings
+    // ---------------------------------------------------------------------------------------------------------------------------
+    "python.formatting.provider": "black",
+    "python.linting.enabled": true,
+    "python.linting.flake8Args": [
+      "--ignore=W293, W504",
+      "--max-line-length=150",
+      "--max-complexity=20"
+    ],
+    "python.linting.flake8Enabled": true,
+    "python.linting.lintOnSave": true,
+    "python.linting.mypyEnabled": true,
+    "python.linting.pycodestyleEnabled": true,
+    "python.pythonPath": "${workspaceRoot}/.venv/Script/python"
+  },
+  "workspaceFolder": "/home/user/code"
+}

@@ -1,24 +1,25 @@
-'''
+"""
 --- Aircraft Design ---
 sizing plot for civil-jet (Far 25)
 *FAR = Federal Aviation Regulation
 Ref. Kenichi Rinoie, "Aircraft
     Design method - conceptual design
     from single pulloperant to SST - "
-'''
-import time
+"""
 import math
-import PySimpleGUI as sg
+import time
+
 import matplotlib.pyplot as plt
+import PySimpleGUI as sg
 
 
-class SizingPlot():
+class SizingPlot:
     def __init__(self):
         # -- Set the graph parameters --
         # common
-        self.m = 200    # range of axis-x
-        self.fit = 25   # fitting parameter
-        self.x = []     # x: (W/S)_TO
+        self.m = 200  # range of axis-x
+        self.fit = 25  # fitting parameter
+        self.x = []  # x: (W/S)_TO
 
         # 1. take-off   * y: (T/W)_TO
         self.y1 = []
@@ -46,8 +47,7 @@ class SizingPlot():
             i = float(i)
             self.x.append(i)
 
-        for j in range(self.fit,
-                       self.m, 1):
+        for j in range(self.fit, self.m, 1):
             j = float(j)
             self.x_cr.append(j)
 
@@ -59,7 +59,7 @@ class SizingPlot():
 
         # s_fl:
         # FAR landing field length
-        self.s_fl = 0.0   # [ft]
+        self.s_fl = 0.0  # [ft]
 
         # m_cruise:
         # Mach number on cruise
@@ -78,7 +78,7 @@ class SizingPlot():
         # velocity on cruise, where
         # sound speed on sea level is
         # 340.3 [m/s]
-        a = self. a_ratio * 340.3
+        a = self.a_ratio * 340.3
         self.v_cruise = self.m_cruise * a
         # transform: 1 [m/s] = 3.281 [ft/s]
         self.v_cruise = 3.281 * self.v_cruise
@@ -116,9 +116,7 @@ class SizingPlot():
             self.c.append(self.c2[j])
 
         # V_SL: stall speed
-        self.V_SL = ((self.s_fl /
-                      0.29) ** 0.5 /
-                     1.3)  # [knot]
+        self.V_SL = (self.s_fl / 0.29) ** 0.5 / 1.3  # [knot]
 
         # -- 3. climb parameters --
         # gamma:
@@ -159,8 +157,7 @@ class SizingPlot():
         # c_d0 = C_FE * S_wet/S_ref
         # where take-off flap (+0.015)
         # in legs putted away
-        self.c_d0 = (self.C_FE * self. SR +
-                     0.015)
+        self.c_d0 = self.C_FE * self.SR + 0.015
 
         #  e_f:
         # Oswald's efficiency
@@ -183,10 +180,7 @@ class SizingPlot():
         # flap and legs are
         # putted away.
         # C_D = C_D0 + C_L^2/eπAR
-        self.C_D = (self.c_d0 +
-                    (self.C_L ** 2) /
-                    (self.e_f * math.pi *
-                     self.ar))
+        self.C_D = self.c_d0 + (self.C_L ** 2) / (self.e_f * math.pi * self.ar)
         # ====================================
         # Therefore, lift_drag
         # is calculated as follow:
@@ -221,19 +215,13 @@ class SizingPlot():
         self.w_r = 0.956
 
     # 1. Take-off
-    def take_off(self, x, y1, y2, y3,
-                 m, sigma1,
-                 c1, s_tofl):
+    def take_off(self, x, y1, y2, y3, m, sigma1, c1, s_tofl):
         for i in range(self.m):
             k = []
             for j in range(3):
-                temp1 = (self.sigma1 *
-                         self.c1[j] *
-                         self.s_tofl)
+                temp1 = self.sigma1 * self.c1[j] * self.s_tofl
 
-                temp2 = (40.3 *
-                         self.x[i] /
-                         temp1)
+                temp2 = 40.3 * self.x[i] / temp1
 
                 k.append(temp2)
 
@@ -242,8 +230,7 @@ class SizingPlot():
             self.y3.append(k[2])
 
     # 2. Land
-    def land(self, x, x1, x2, x3, x4,
-             m, sigma2, c2, s_fl):
+    def land(self, x, x1, x2, x3, x4, m, sigma2, c2, s_fl):
         # m times repeat
         count = 0
         while count < self.m:
@@ -251,7 +238,7 @@ class SizingPlot():
 
             k = []
             for j in range(4):
-                '''
+                """
                 Unit transformation:
                 1 [kg] = 2.2046 [lb]
                 1 [m] = 3.281 [ft]
@@ -267,17 +254,12 @@ class SizingPlot():
                   In cruise, it's
                   diffrent on the
                   (cruise) height.
-                '''
+                """
                 # density [lb*s^2/ft^4]
-                density = (self.sigma2 *
-                           0.125 * 2.2046 /
-                           (3.281 ** 4))
+                density = self.sigma2 * 0.125 * 2.2046 / (3.281 ** 4)
 
                 # temp1 = (W/S)_lift
-                temp1 = (density *
-                         ((self.V_SL *
-                           1.688) ** 2) *
-                         self.c2[j] / 2)
+                temp1 = density * ((self.V_SL * 1.688) ** 2) * self.c2[j] / 2
                 # where
                 #       W_lift
                 #       = 0.85 W_take-off,
@@ -293,24 +275,21 @@ class SizingPlot():
             self.x4.append(k[3])
 
         # output stall speed V_SL
-        print("Land: V_SL =",
-              self.V_SL, "[knot]")
+        print("Land: V_SL =", self.V_SL, "[knot]")
 
     # 3. Climb
     def climb(self, y4, m, lp, lift_drag):
-        '''
+        """
         Far25.121:
         gamma = lp (T/W)_TO / 2
                 - 1/(L/D)
               >= 0.024
-        '''
+        """
         count = 0
         while count < self.m:
             count += 1
 
-            k = (2 * self.lp *
-                 (1 / self.lift_drag +
-                  self.gamma))
+            k = 2 * self.lp * (1 / self.lift_drag + self.gamma)
             # consider of the 27.8
             # celsius temperature,
             # 20% decrease
@@ -318,11 +297,8 @@ class SizingPlot():
             self.y4.append(k)
 
     # 4. Cruise
-    def cruise(self, x_cr, y5, m,
-               lp_cr, e_clean,
-               v_cruise, c_d0,
-               w_r, ar):
-        '''
+    def cruise(self, x_cr, y5, m, lp_cr, e_clean, v_cruise, c_d0, w_r, ar):
+        """
         function  y = f(x):
              y = 1/lp_cr *
                  (W_cr/W_TO) *
@@ -334,52 +310,38 @@ class SizingPlot():
         In this program,
                         k = y
             temp1 + temp3  = (T/W)_cruise
-        '''
+        """
         for i in range(self.m - self.fit):
             # density
             # 0.002378 [lb*s^2/ft^4]
-            density = (0.31 * 0.125 *
-                       2.2046 / (3.281 ** 4))
+            density = 0.31 * 0.125 * 2.2046 / (3.281 ** 4)
 
             # q:
             # kinematic pressure
             # deinition q := ρV^2 / 2
-            q = (0.5 * density *
-                 (self.v_cruise ** 2))
+            q = 0.5 * density * (self.v_cruise ** 2)
 
-            temp1 = ((self.c_d0 - 0.015 +
-                      0.003) * q /
-                     (self.w_r *
-                      self.x_cr[i]))
+            temp1 = (self.c_d0 - 0.015 + 0.003) * q / (self.w_r * self.x_cr[i])
 
             # temp2: q * eπAR
-            temp2 = (q * self.e_clean *
-                     math.pi * self.ar)
+            temp2 = q * self.e_clean * math.pi * self.ar
 
-            temp3 = (self.w_r *
-                     self.x_cr[i] /
-                     temp2)
+            temp3 = self.w_r * self.x_cr[i] / temp2
 
             # y_cruise = (T/W)_cruise
             y_cruise = temp1 + temp3
 
             # k = (T/W)_TO
-            k = (self.w_r * y_cruise /
-                 self.lp_cr)
+            k = self.w_r * y_cruise / self.lp_cr
 
             self.y5.append(k)
 
     # Output
-    def output(self, x, y1, y2, y3,
-               m, c, x1, x2, x3,
-               x4, y4, x_cr, y5):
+    def output(self, x, y1, y2, y3, m, c, x1, x2, x3, x4, y4, x_cr, y5):
         # set labels
         plt.xlabel("(W/S) take-off")
         plt.ylabel("(T/W) take-off")
-        plt.title("Sizing-Plot",
-                  c="darkred",
-                  size="large",
-                  style="italic")
+        plt.title("Sizing-Plot", c="darkred", size="large", style="italic")
 
         # plot 1. take-off
         plt.plot(x, self.y1, label=f"C_LmaxTO = {self.c[0]}")
@@ -405,8 +367,7 @@ class SizingPlot():
         # plot 4. cruise
         plt.plot(self.x_cr, self.y5, label="Cruise")
 
-        plt.legend(loc="upper left",
-                   frameon=True)
+        plt.legend(loc="upper left", frameon=True)
         plt.show()
 
     # GUI Design:
@@ -427,24 +388,46 @@ class SizingPlot():
         self.s_fl = 5000.0   # [ft]
         """
         sg.theme("BlueMono")
-        OK = 'ok'
-        layout = [[sg.Text("1st Sizing - Design Requirement -")],
-                  [sg.Text("Select parameters")],
-                  # Cruise
-                  [sg.Text("Mach number", size=(15, 1)),
-                   sg.Combo(("0.7", "0.75", "0.8"), size=(10, 1), key="mach",
-                            text_color=None, default_value="0.8")],
-                  #  Take off
-                  [sg.Text("Takeoff field length[ft]", size=(15, 1)),
-                   sg.Combo(("5000", "6000"), size=(10, 1), key="tofl",
-                            text_color=None, default_value="5000")],
-                  # Land
-                  [sg.Text("FAR field length[ft]", size=(15, 1)),
-                   sg.Combo(("6000", "6500"), size=(10, 1), key="fl",
-                            text_color=None, default_value="6000")],
-                  # OK or cancel
-                  [sg.Button("OK", key=OK), sg.Cancel()]
-                  ]
+        OK = "ok"
+        layout = [
+            [sg.Text("1st Sizing - Design Requirement -")],
+            [sg.Text("Select parameters")],
+            # Cruise
+            [
+                sg.Text("Mach number", size=(15, 1)),
+                sg.Combo(
+                    ("0.7", "0.75", "0.8"),
+                    size=(10, 1),
+                    key="mach",
+                    text_color=None,
+                    default_value="0.8",
+                ),
+            ],
+            #  Take off
+            [
+                sg.Text("Takeoff field length[ft]", size=(15, 1)),
+                sg.Combo(
+                    ("5000", "6000"),
+                    size=(10, 1),
+                    key="tofl",
+                    text_color=None,
+                    default_value="5000",
+                ),
+            ],
+            # Land
+            [
+                sg.Text("FAR field length[ft]", size=(15, 1)),
+                sg.Combo(
+                    ("6000", "6500"),
+                    size=(10, 1),
+                    key="fl",
+                    text_color=None,
+                    default_value="6000",
+                ),
+            ],
+            # OK or cancel
+            [sg.Button("OK", key=OK), sg.Cancel()],
+        ]
 
         window = sg.Window("Sizing plot", layout=layout)
 
@@ -483,42 +466,51 @@ if __name__ == "__main__":
     sp = SizingPlot()
 
     # GUI
-    sp.gui(sp.m_cruise, sp.s_tofl,
-           sp.s_fl)
-    print("m_cruise = ",
-          sp.m_cruise)
+    sp.gui(sp.m_cruise, sp.s_tofl, sp.s_fl)
+    print("m_cruise = ", sp.m_cruise)
     print(sp.s_tofl, sp.s_fl)
 
     # set parameters
     sp.set_param()
 
     # 1. Take-off
-    sp.take_off(sp.x, sp.y1, sp.y2,
-                sp.y3, sp.m, sp.sigma1,
-                sp.c1, sp.s_tofl)
+    sp.take_off(sp.x, sp.y1, sp.y2, sp.y3, sp.m, sp.sigma1, sp.c1, sp.s_tofl)
     # 2. Land
-    sp.land(sp.x, sp.x1, sp.x2,
-            sp.x3, sp.x4, sp.m,
-            sp.sigma2, sp.c2, sp.s_fl)
+    sp.land(sp.x, sp.x1, sp.x2, sp.x3, sp.x4, sp.m, sp.sigma2, sp.c2, sp.s_fl)
     # 3. Climb
-    sp.climb(sp.y4, sp.m, sp.lp,
-             sp.lift_drag)
+    sp.climb(sp.y4, sp.m, sp.lp, sp.lift_drag)
     # 4. Cruise
-    sp.cruise(sp.x_cr, sp.y5, sp.m,
-              sp.lp_cr, sp.e_clean,
-              sp.v_cruise, sp.c_d0,
-              sp.w_r, sp.ar)
+    sp.cruise(
+        sp.x_cr,
+        sp.y5,
+        sp.m,
+        sp.lp_cr,
+        sp.e_clean,
+        sp.v_cruise,
+        sp.c_d0,
+        sp.w_r,
+        sp.ar,
+    )
 
     # Output
-    sp.output(sp.x,
-              sp.y1, sp.y2, sp.y3,
-              sp.m, sp.c,
-              sp.x1, sp.x2, sp.x3,
-              sp.x4, sp.y4,
-              sp.x_cr, sp.y5)
+    sp.output(
+        sp.x,
+        sp.y1,
+        sp.y2,
+        sp.y3,
+        sp.m,
+        sp.c,
+        sp.x1,
+        sp.x2,
+        sp.x3,
+        sp.x4,
+        sp.y4,
+        sp.x_cr,
+        sp.y5,
+    )
 
     end = time.time()
-    time = end - start
-    print("time =", time, "[sec]")
+    elapsed_time = end - start
+    print("time =", elapsed_time, "[sec]")
 
 # End of sizing-plot.py

@@ -1,0 +1,16 @@
+# https://dev.classmethod.jp/articles/add-vs-code-remote-development-settings-to-existing-docker-environment/
+
+version: "3.7"
+services:
+  python-gui:
+    build:
+      dockerfile: ./docker/Dockerfile
+
+    restart: always
+    tty: true
+    volumes:
+      - ./:/home/user/code
+      - /mnt/wslg:/mnt/wslg
+      - /tmp/.X11-unix:/tmp/.X11-unix
+    env_file:
+      - ./docker/wslg/.env.wslg

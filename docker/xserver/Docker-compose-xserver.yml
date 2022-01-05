@@ -1,0 +1,11 @@
+version: "3.7"
+services:
+  python-gui:
+    build:
+      dockerfile: ./docker/Dockerfile
+    restart: always
+    tty: true
+    volumes:
+      - ./:/home/user/code
+    env_file:
+      - ./docker/xserver/.env.xserver

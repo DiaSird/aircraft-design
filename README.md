@@ -28,6 +28,7 @@ Revised: 2021/
 ---
 
 [](p=paragraph)
+
 <p align="center">
 <img src="img/Fig1.png" width="80%">
 
@@ -41,7 +42,7 @@ Revised: 2021/
 
 ---
 
-``` Shell
+```Shell
 .
 ├──── Makefile                    # make ref. chapter 4 (Make Usage)
 └──── src                         # source code
@@ -60,31 +61,52 @@ If you do not have `poetry` installed, you can install it with the following com
 
 ```shell
 pip install poetry
+make install-dev
 ```
 
 if you use Anaconda3
 
 ```shell
 conda install -c conda-forge poetry
+make install-dev
 ```
 
 More info is [here.](https://raw.githubusercontent.com/python-poetry/poetry/master/install)
 
+If you use Docker, see below please.
+
+[how to use docker](docs/i18n/en/docker.md)
+
 ## 4. Make usage
 
 ---
-default:
-make = make run
 
-| Command    |              Description               |
-| :--------- | :------------------------------------: |
-| `make run` | Run python file(default: `src/run.py`) |
+default:
+make = make start
+
+| Command            | Description                                               |
+| :----------------- | :-------------------------------------------------------- |
+| `make start`       | Run python file(default: `src/1st-sizing/sizeplt-gui.py`) |
+| `make install-dev` | Install dependencies (For dev)                            |
+| `make install`     | Install dependencies (For prod)                           |
+| `make test`        | Test with pytest                                          |
+| `make lint`        | Lint with pysen                                           |
+| `make lint-fix`    | Lint fix with pysen                                       |
+| `make clean`       | Remove `__pycache__` files                                |
+
+If you are using windows, you can install the `make` command
+[here](http://gnuwin32.sourceforge.net/packages/make.htm). (Click the `Setup`
+button at the top.)
 
 ## Reference
 
 ---
 
 [1] Kenichi Rinoie, "Aircraft Design method -
-         conceptual design from single pulloperant to SST - "
+conceptual design from single pulloperant to SST - "
 
 [2] Daniel P.Raymer, Aircraft Design: A Conceptual Approach (AIAA Education Series), Sixth Edition
+
+## License
+
+MIT
