@@ -46,20 +46,24 @@ class SizingPlot():
             i = float(i)
             self.x.append(i)
 
-        for j in range(self.fit, self.m, 1):
+        for j in range(self.fit,
+                       self.m, 1):
             j = float(j)
             self.x_cr.append(j)
 
         # # -- Design Requirements --
         # Initialize
-        # s_tofl: take-off field length
+        # s_tofl:
+        # take-off field length
         self.s_tofl = 0.0  # [ft]
 
-        # s_fl: FAR landing field length
+        # s_fl:
+        # FAR landing field length
         self.s_fl = 0.0   # [ft]
 
-        # m_cruise: Mach number on cruise
-        #           definition  M := V/a
+        # m_cruise:
+        # Mach number on cruise
+        # definition  M := V/a
         self.m_cruise = 0.80
 
     def set_param(self):
@@ -112,8 +116,9 @@ class SizingPlot():
             self.c.append(self.c2[j])
 
         # V_SL: stall speed
-        self.V_SL = ((self.s_fl / 0.29) **
-                     0.5 / 1.3)  # [knot]
+        self.V_SL = ((self.s_fl /
+                      0.29) ** 0.5 /
+                     1.3)  # [knot]
 
         # -- 3. climb parameters --
         # gamma:
@@ -136,15 +141,17 @@ class SizingPlot():
         # = 1.2^2 * C_L, thus
         self.C_L = self.C3 / (1.2 ** 2)
 
-        # C_FE:
-        # equivalent skin friction coefficient
+        # C_FE:　coefficient of
+        # equivalent skin friction
         # approximately 0.003
         self.C_FE = 0.003
 
-        # SR: area ratio between
-        # wetted area and reference area
+        # SR: area ratio
+        # between wetted area
+        # and reference area
         # SR = S_wet/S_ref
-        # * decide from the existing airplane
+        # decided from
+        # the existing airplane
         self.SR = 5.8
 
         # c_d0:
@@ -156,7 +163,7 @@ class SizingPlot():
                      0.015)
 
         #  e_f:
-        # Oswalift_drag's efficiency
+        # Oswald's efficiency
         # factor (max: e = 1)
         # where take-off flap
         # in legs putted away
@@ -164,13 +171,17 @@ class SizingPlot():
 
         # ar:
         # aspect ratio
-        # * decide from the existing airplane
+        # decided from
+        # the existing airplane
         self.ar = 8.0
 
         # C_D:
-        # drag coefficient in the clean form
-        # "clean form" is the status that
-        # flap and legs are putted away.
+        # drag coefficient
+        # in the clean form
+        # "clean form" is
+        # the status that
+        # flap and legs are
+        # putted away.
         # C_D = C_D0 + C_L^2/eπAR
         self.C_D = (self.c_d0 +
                     (self.C_L ** 2) /
@@ -246,14 +257,16 @@ class SizingPlot():
                 1 [m] = 3.281 [ft]
                 1 [knot] = 1.688 [ft/s]
 
-                density on the sea level
-                is 0.125 [kg*s^2/m^4]
+                Density on the sea
+                level is 0.125
+                [kg*s^2/m^4].
 
                 * "density" is a local
-                  variable, so this name
-                  is used phase 4.
-                  In cruise, it's diffrent
-                  on the (cruise) height.
+                  variable, so this
+                  name is used phase 4.
+                  In cruise, it's
+                  diffrent on the
+                  (cruise) height.
                 '''
                 # density [lb*s^2/ft^4]
                 density = (self.sigma2 *
