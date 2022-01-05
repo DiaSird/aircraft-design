@@ -33,18 +33,21 @@ Revised: 2021/
 
 </p>
 
-- 1st sizing
+- 1st sizing:
+
   This code shows the sizing plot graph. The sizing plot can be estimated aircraft parameters such that Thrust-Weight ratio, Weight-Wing area ratio on taking off.
 
 ## 2. Directory Structure
 
 ---
 
+``` Shell
 .
-├── Makefile            # make ref. chapter 4 (Make Usage)
-└── src                 # source code
-        ├── sizeplt-gui.py          # sizing plot with the GUI module PySimpleGUI
-        └── W-takeoff.f90           # initial sizing for maximum take-off weight
+├──── Makefile                    # make ref. chapter 4 (Make Usage)
+└──── src                         # source code
+    ├──── sizeplt-gui.py          # sizing plot with the GUI module PySimpleGUI
+    └──── W-takeoff.f90           # initial sizing for maximum take-off weight
+```
 
 ## 3. Requirements
 
