@@ -144,7 +144,7 @@ class SizingPlot:
         # approximately 0.003
         self.C_FE = 0.003
 
-        # SR: area ratio
+        # SR: area(=S) ratio
         # between wetted area
         # and reference area
         # SR = S_wet/S_ref
@@ -211,8 +211,10 @@ class SizingPlot:
         # w_r:
         # weight ratio between
         # cruise and take-off
-        # w_r = (W_cr / W_TO) = 0.965
+        # w_r = (W_cr / W_TO) = 0.956
         self.w_r = 0.956
+
+    # End of __init__
 
     # 1. Take-off
     def take_off(self, x, y1, y2, y3, m, sigma1, c1, s_tofl):
@@ -336,7 +338,7 @@ class SizingPlot:
 
             self.y5.append(k)
 
-    # Output
+    # A. Output
     def output(self, x, y1, y2, y3, m, c, x1, x2, x3, x4, y4, x_cr, y5):
         # set labels
         plt.xlabel("(W/S) take-off")
@@ -370,21 +372,20 @@ class SizingPlot:
         plt.legend(loc="upper left", frameon=True)
         plt.show()
 
-    # GUI Design:
-
+    # B. GUI Design:
     def gui(self, m_cruise, s_tofl, s_fl):
         """
         -- Design Requirements --
         *Default
 
-        m_cruise: Mach number on cruise
+        (a) m_cruise: Mach number on cruise
                   definition  M := V/a
         self.m_cruise = 0.80
 
-        s_tofl: take-off field length
+        (b) s_tofl: take-off field length
         self.s_tofl = 6000.0  # [ft]
 
-        s_fl: Far landing field length
+        (c) s_fl: Far landing field length
         self.s_fl = 5000.0   # [ft]
         """
         sg.theme("BlueMono")
@@ -455,7 +456,8 @@ class SizingPlot:
                 self.s_fl = 6500.0
 
         window.close()
-        # End of GUI Design
+
+    # End of GUI Design
 
 
 if __name__ == "__main__":

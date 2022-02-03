@@ -29,11 +29,21 @@ Revised: 2021/
 ---
 
 [](p=paragraph)
+<p align="center">
+<img src="docs/img/Fig1.png" width="40%">
+</p>
+
+<div align="center">
+Fig.1 Set parameters
+</div>
 
 <p align="center">
-<img src="img/Fig1.png" width="80%">
-
+<img src="docs/img/Fig2.png" width="80%">
 </p>
+
+<div align="center">
+Fig.2 Sizing plot simulation
+</div>
 
 - 1st sizing:
 

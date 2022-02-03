@@ -2,7 +2,7 @@
 
 English | [日本語](../jp/docker.md)
 
-![WSLg](../../images/wslg.png)
+![WSLg](../../img/wslg.png)
 
 - [aircraft-design](#aircraft-design)
 

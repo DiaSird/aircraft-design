@@ -2,7 +2,7 @@
 
 [English](../en/docker.md) | 日本語
 
-![WSLg](../../images/wslg.png)
+![WSLg](../../img/wslg.png)
 
 - [Docker](#docker)
   - [必要なもの](#必要なもの)
