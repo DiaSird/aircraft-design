@@ -3,7 +3,7 @@
 ! MODULE: parameters
 !
 !
-! DESCRIPTION: 
+! DESCRIPTION:
 !>  パラメータ定義
 !
 ! REVISION HISTORY:
@@ -42,14 +42,10 @@ end module
 !
 ! MAIN PROGRAM: first_sizing
 !
-!> @author
-!> Takuho MOCHIZUKI
-!
-!
 ! REVISION HISTORY:
 ! 06 11 2021 - Initial Version
 !------------------------------------------------------------------------------
-! 
+!
 program first_sizing
     use parameters
     implicit none
@@ -72,7 +68,7 @@ end program
 ! REVISION HISTORY:
 ! 06 11 2021 - Initial Version
 !------------------------------------------------------------------------------
-! 
+!
 subroutine initialize
     use parameters
     implicit none
@@ -102,7 +98,7 @@ subroutine initialize
     write (*, *) ""
     write (*, *) "-- Initialize --"
     write (*, *) "You guessed take-off weight WTO [lb] = "
-    write (*, "(f15.4)") WTO 
+    write (*, "(f15.4)") WTO
 
 end subroutine
 
@@ -111,13 +107,13 @@ end subroutine
 ! SUBROUTINE: Breguet
 !
 !
-! DESCRIPTION: 
+! DESCRIPTION:
 !>  Calculate weight ratio with Breguet range formula
 !
 ! REVISION HISTORY:
 ! 06 11 2021 - Initial Version
 !------------------------------------------------------------------------------
-! 
+!
 subroutine Breguet(n)
     use parameters
     implicit none
@@ -153,14 +149,14 @@ end subroutine
 ! SUBROUTINE: mission_fuel_fraction
 !
 !
-! DESCRIPTION: 
-!>  Calculate Mff = mission fuel fraction 
+! DESCRIPTION:
+!>  Calculate Mff = mission fuel fraction
 !  フライト時の機体重量比を算出
 !
 ! REVISION HISTORY:
 ! 06 11 2021 - Initial Version
 !------------------------------------------------------------------------------
-! 
+!
 subroutine mission_fuel_fraction(n)
     use parameters
     implicit none
@@ -181,7 +177,7 @@ subroutine mission_fuel_fraction(n)
         W5W4_W6W5 = W
         W7W6 = a
         W8W7 = a + 0.002d0
-    
+
     else if ( n == 2 ) then
         W1WTO = a
         W2W1 = a
@@ -215,14 +211,14 @@ end subroutine
 !------------------------------------------------------------------------------
 !
 ! SUBROUTINE: aircraft_parameter
-! 
-! DESCRIPTION: 
+!
+! DESCRIPTION:
 !>  統計関係式で使用するパラメータA,Bの入力
 !
 ! REVISION HISTORY:
 ! 06 11 2021 - Initial Version
 !------------------------------------------------------------------------------
-! 
+!
 subroutine aircraft_parameter(A, B, n)
     implicit none
     integer n
@@ -239,11 +235,11 @@ subroutine aircraft_parameter(A, B, n)
     else if ( n == 2 ) then
         A = 0.186d0
         B = 1.012d0
-        
+
     else if ( n == 3 ) then
         A = - 0.144d0
         B = 1.116d0
-        
+
     end if
 
     return
@@ -254,13 +250,13 @@ end subroutine
 ! SUBROUTINE:Output
 !
 !
-! DESCRIPTION: 
+! DESCRIPTION:
 !>  機体重量の計算と出力
 !
 ! REVISION HISTORY:
 ! 06 11 2021 - Initial Version
 !------------------------------------------------------------------------------
-! 
+!
 subroutine Output(A, B)
     use parameters
     implicit none
@@ -303,8 +299,9 @@ subroutine Output(A, B)
             write (*, *) ""
             write (*, *) "Change guessed take off Weight. You need to repeat."
             write (*, *) ""
+            stop
         end if
     ! end do
-    
+
     return
 end subroutine
