@@ -82,7 +82,6 @@ class LapseRate:
                 self.k[3] = 0.005
 
         s = 0.7
-        mach = 1.0
         for i in range(self.max_t):
             if i >= 1:
                 mach =  0.1 * i
@@ -105,8 +104,7 @@ class LapseRate:
 
             self.lp = (self.k[0] + self.k[1] * self.bpr + (self.k[2] +
                     self.k[3] * self.bpr) * mach) * (self.sigma ** s)
-
-            print(mach)
+            # print(mach)
 
             self.x.append(mach)
             self.y.append(self.lp)

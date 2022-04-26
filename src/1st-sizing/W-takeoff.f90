@@ -2,16 +2,16 @@
 !
 ! MODULE: parameters
 !
-!
 ! DESCRIPTION:
 !>  パラメータ定義
 !
 ! REVISION HISTORY:
 ! 06 11 2021 - Initial Version
+! 26 04 2022 - Updated
 !------------------------------------------------------------------------------
 module parameters
     implicit none
-    ! integer, parameter :: loop = 100
+    integer, parameter :: t_max = 1000
 
 !---Specification 設計要求
     ! prameter: air(craft)
@@ -20,14 +20,23 @@ module parameters
     ! 3 = 単発軽飛行機
     integer, parameter :: air = 1
 
+    ! sound of air
+    double precision, parameter :: air_sound = 296.6
+    double precision, parameter :: Mach = 0.82
     ! cruise velocity V [knot]
-    double precision, parameter :: V_cruise = 472.8
+    double precision, parameter :: V_cruise = air_sound / Mach
     ! Range R [nm, nautical mile]
     double precision, parameter :: R = 5000
     ! Payload WPL [lb]
     double precision, parameter :: WPL = 64698
+
+!---初期推定重量
+    double precision :: WTO_init = 400000.d0 ! WTO_guess [lb]
+    ! double precision :: WTO_init = 520000.d0 ! WTO_guess [lb]
     ! Maximum take-off weight WTO [lb]
     double precision :: WTO
+    ! 重量の増分
+    double precision, parameter :: dW = 10000.d0
 
 !---Parameters
     double precision :: W
@@ -74,9 +83,7 @@ subroutine initialize
     implicit none
 
 !---初期推定重量
-    ! WTO = 500000.d0 ! WTO_guess [lb]
-    WTO = 520000.d0 ! WTO_guess [lb]
-
+    WTO = WTO_init
 
 !---ジェット旅客機 green, pp.73 ~ 74
     ! 例題4.2
@@ -86,7 +93,7 @@ subroutine initialize
     ! ltr = loiter, holding (green, p.74)
     E_ltr = 45.d0 / 60.d0 ! E_ltr [min/1hr = hr]
     cj_ltr = 0.4d0 ! cj_ltr = 0.4 ~ 0.6 [(lb/hr)/lb]
-    LD_ltr = 18d0 ! (L/D)ltr = 14 ~ 18
+    LD_ltr = 18.d0 ! (L/D)ltr = 14 ~ 18
 
 !---プロペラ機
     C = 326.d0 ! 単位換算係数
@@ -118,26 +125,26 @@ subroutine Breguet(n)
     use parameters
     implicit none
     integer n
-    double precision :: p, q
+    double precision :: W5W4, W6W5
 
 
     if ( n == 1) then
-        p = exp(- R / (V_cruise / cj) / LD)
-        q = exp(- E_ltr / (V_cruise / cj_ltr) / LD_ltr)
-        W = p * q ! W5/W4 * W6/W5
+        W5W4 = exp(- R / (V_cruise / cj) / LD)
+        W6W5 = exp(- E_ltr / (V_cruise / cj_ltr) / LD_ltr)
+        W = W5W4 * W6W5 ! W5/W4 * W6/W5
 
         write(*, *) ""
         write (*, *) "-- Breguet Range formula Phase 5 and 6 --"
-        write (*, "(A, f10.4)") "cruise weight ratio = ", p
-        write (*, "(A, f10.4)") "loiter weight ratio = ", q
+        write (*, "(A, f10.4)") "cruise weight ratio = ", W5W4
+        write (*, "(A, f10.4)") "loiter weight ratio = ", W6W5
 
     else if ( n == 2) then
-        p = exp(- R / (C * efficient_p / cp) / LD)
-        W = p
+        W5W4 = exp(- R / (C * efficient_p / cp) / LD)
+        W = W5W4
 
         write(*, *) ""
         write (*, *) "-- Breguet Range formula Phase 5 and 6 --"
-        write (*, "(A, f10.4)") "cruise weight ratio = ", p
+        write (*, "(A, f10.4)") "cruise weight ratio = ", W5W4
 
     end if
 
@@ -261,14 +268,14 @@ subroutine Output(A, B)
     use parameters
     implicit none
 
-    ! integer i
+    integer i
     double precision :: k
     double precision :: WOE, WF
     double precision :: A, B, temp
     double precision :: Error, WOE_tent
 
     ! Loop
-    ! do i = 1, loop
+    do i = 1, t_max
         k = 0.d0
         WF = ((1 - Mff) + k) * WTO
         ! WF = 0.365 * WTO ! 例題4.2: 1 - Mff = 0.365
@@ -283,15 +290,21 @@ subroutine Output(A, B)
 !-------Output
         Error = 1 - WOE / WOE_tent
         if ( abs(Error) <= 0.05 ) then
+            write (*, *) ""
             write (*, *) "-- Successfully. --"
-            ! write (*, "(A, f15.4)") "WTO = ", WTO
             write (*, "(A, f15.4)") "WOE_tent = ", WOE_tent
             write (*, "(A, f15.4)") "WOE = ", WOE
             write (*, "(A, f15.4)") "|WOE - WOE_tent| = ", abs(Error)
+            write (*, *) ""
+            write (*, *) "--    Resuls    --"
+            write (*, "(A, f15.4)") "WTO = ", WTO
+            write (*, "(A, f15.4)") "WOE = ", WOE
+            write (*, "(A, f15.4)") "WF  = ", WF
+            write (*, *) ""
             stop
         else
             write (*, *) ""
-            write (*, *) "-- Weight error --"
+            write (*, *) "--     Weight error.     --"
             ! write (*, "(A, f15.4)") "WTO = ", WTO
             write (*, "(A, f15.4)") "WOE_tent = ", WOE_tent
             write (*, "(A, f15.4)") "WOE = ", WOE
@@ -299,9 +312,9 @@ subroutine Output(A, B)
             write (*, *) ""
             write (*, *) "Change guessed take off Weight. You need to repeat."
             write (*, *) ""
-            stop
         end if
-    ! end do
+        WTO = WTO + dW
+    end do
 
     return
 end subroutine

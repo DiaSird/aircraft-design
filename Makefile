@@ -22,7 +22,7 @@ start:
 				gfortran src/1st-sizing/W-takeoff.f90 -o src/init_sizing.exe
 				./src/init_sizing.exe
 				poetry run python src/1st-sizing/sizing_plt.py
-				poetry run python src/2nd-sizing/lapse_rate.py
+				poetry run python src\2nd-sizing\lapse_rate.py
 
 lint:
 				poetry run pysen run lint
