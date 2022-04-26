@@ -1,16 +1,13 @@
-!------------------------------------------------------------------------------
+﻿!------------------------------------------------------------------------------
 !
 ! MODULE: parameters
 !
-!> @author
-!> name}
 !
 ! DESCRIPTION: 
-!>  Short module description
+!>  パラメータ定義
 !
 ! REVISION HISTORY:
 ! 06 11 2021 - Initial Version
-! TODO_dd_mmm_yyyy - TODO_describe_appropriate_changes - TODO_name
 !------------------------------------------------------------------------------
 module parameters
     implicit none
@@ -22,10 +19,15 @@ module parameters
     ! 2 = リージョナルジェット機
     ! 3 = 単発軽飛行機
     integer, parameter :: air = 1
-    double precision, parameter :: V_cruise = 472.8 ! cruise velocity V [knot]
-    double precision, parameter :: R = 5000 ! Range R [nm, nautical mile]
-    double precision, parameter :: WPL = 64698 ! Payload WPL [lb]
-    double precision :: WTO ! Maximum take-off weight WTO [lb]
+
+    ! cruise velocity V [knot]
+    double precision, parameter :: V_cruise = 472.8
+    ! Range R [nm, nautical mile]
+    double precision, parameter :: R = 5000
+    ! Payload WPL [lb]
+    double precision, parameter :: WPL = 64698
+    ! Maximum take-off weight WTO [lb]
+    double precision :: WTO
 
 !---Parameters
     double precision :: W
@@ -41,14 +43,11 @@ end module
 ! MAIN PROGRAM: first_sizing
 !
 !> @author
-!> name}
+!> Takuho MOCHIZUKI
 !
-! DESCRIPTION: 
-!>  Short module description
 !
 ! REVISION HISTORY:
 ! 06 11 2021 - Initial Version
-! TODO_dd_mmm_yyyy - TODO_describe_appropriate_changes - TODO_name
 !------------------------------------------------------------------------------
 ! 
 program first_sizing
@@ -62,22 +61,16 @@ program first_sizing
     call aircraft_parameter(A, B, air)
     call Output(A, B)
     stop
-    
+
 end program
 
 !------------------------------------------------------------------------------
 !
 ! SUBROUTINE:initialize
 !
-!> @author
-!> name}
-!
-! DESCRIPTION: 
-!>  Short module description
 !
 ! REVISION HISTORY:
 ! 06 11 2021 - Initial Version
-! TODO_dd_mmm_yyyy - TODO_describe_appropriate_changes - TODO_name
 !------------------------------------------------------------------------------
 ! 
 subroutine initialize
@@ -117,15 +110,12 @@ end subroutine
 !
 ! SUBROUTINE: Breguet
 !
-!> @author
-!> name}
 !
 ! DESCRIPTION: 
-!>  Calculate weight ratio by Breguet range formula
+!>  Calculate weight ratio with Breguet range formula
 !
 ! REVISION HISTORY:
 ! 06 11 2021 - Initial Version
-! TODO_dd_mmm_yyyy - TODO_describe_appropriate_changes - TODO_name
 !------------------------------------------------------------------------------
 ! 
 subroutine Breguet(n)
@@ -160,10 +150,8 @@ end subroutine
 
 !------------------------------------------------------------------------------
 !
-! SUBROUTINE: 
+! SUBROUTINE: mission_fuel_fraction
 !
-!> @author
-!> neme}
 !
 ! DESCRIPTION: 
 !>  Calculate Mff = mission fuel fraction 
@@ -171,7 +159,6 @@ end subroutine
 !
 ! REVISION HISTORY:
 ! 06 11 2021 - Initial Version
-! TODO_dd_mmm_yyyy - TODO_describe_appropriate_changes - TODO_name
 !------------------------------------------------------------------------------
 ! 
 subroutine mission_fuel_fraction(n)
@@ -227,17 +214,13 @@ end subroutine
 
 !------------------------------------------------------------------------------
 !
-! SUBROUTINE: 
-!
-!> @author
-!> name}
-!
+! SUBROUTINE: aircraft_parameter
+! 
 ! DESCRIPTION: 
-!>  Short module description
+!>  統計関係式で使用するパラメータA,Bの入力
 !
 ! REVISION HISTORY:
 ! 06 11 2021 - Initial Version
-! TODO_dd_mmm_yyyy - TODO_describe_appropriate_changes - TODO_name
 !------------------------------------------------------------------------------
 ! 
 subroutine aircraft_parameter(A, B, n)
@@ -268,17 +251,14 @@ end subroutine
 
 !------------------------------------------------------------------------------
 !
-! SUBROUTINE:
+! SUBROUTINE:Output
 !
-!> @author
-!> name}
 !
 ! DESCRIPTION: 
-!>  Short module description
+!>  機体重量の計算と出力
 !
 ! REVISION HISTORY:
 ! 06 11 2021 - Initial Version
-! TODO_dd_mmm_yyyy - TODO_describe_appropriate_changes - TODO_name
 !------------------------------------------------------------------------------
 ! 
 subroutine Output(A, B)
