@@ -25,6 +25,7 @@ Revised: 2021/
   - [License](#license)
 
 ## 1. Abstract
+Simulation of an aircraft conceptual design methodology in a python GUI module. However, since the content of this module is contained in a single class file, it is not suitable for other applications at present.
 
 ---
 
